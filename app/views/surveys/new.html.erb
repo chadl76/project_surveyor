@@ -1,0 +1,9 @@
+			<%=form_for @survey do |survey_form| %>
+		
+			  <%= survey_form.label :title %>
+			  <%= survey_form.text_field :title%>
+			
+
+			<%= survey_form.submit "Create form", :class => "btn btn-large btn-primary btn-block" %>
+			<% end %>
+	
