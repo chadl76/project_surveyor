@@ -44,6 +44,8 @@ gem 'bootstrap'
 
 gem 'pry'
 
+gem 'pg'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
