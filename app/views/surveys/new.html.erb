@@ -2,8 +2,18 @@
 		
 			  <%= survey_form.label :title %>
 			  <%= survey_form.text_field :title%>
+
+			  <h1>type</h1>
+
+			  <%=survey_form.fields_for(:question_type, QuestionType.new) do |question_type_fields| %>
+			  <%= question_type_fields.label :question_type %>
+			  <%= question_type_fields.collection_select(:question_type,
+			  	  QuestionType.all,
+			  	  :id,
+			  	  :question_type	) %>
 			
 
 			<%= survey_form.submit "Add a New Question", :class => "btn btn-large btn-primary btn-block" %>
+			<% end %>
 			<% end %>
 	

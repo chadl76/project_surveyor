@@ -19,11 +19,12 @@ puts "Old records destroyed"
 
 QUESTION_TYPE = ["Mutliple Choice", "Single"]
 MULTIPLIER = 10
-def generate_question_types
+
+def generate_question_types(q_type)
 	#binding.pry
-	qt = QuestionType.new
-	qt[:questions_id] = Question.pluck(:id).sample
-	qt[:question_type] = QUESTION_TYPE.sample
+	qt = QuestionType.new({:question_type => q_type})
+	qt[:question_id] = Question.pluck(:id).sample
+	#qt[:question_type] = q_type
 	#binding.pry
 	qt.save
 end
@@ -32,7 +33,7 @@ def generate_surveys
 	s = Survey.new
 	s[:title] = Faker::Lorem.word.upcase
 	s[:description] = Faker::Lorem.sentence
-	s[:questions_id] = Question.pluck(:id).sample
+	s[:question_id] = Question.pluck(:id).sample
 
 	s.save
 end
@@ -46,16 +47,24 @@ def generate_questions
 	q[:options_num] = Faker::Number.between(1,5)
 	q[:question_type_id] = QuestionType.pluck(:id).sample
 	q.save
+
+	generate_options(q[:id], q[:options_num])
 end
 
 
-def generate_options
-	o = Option.new
-	o[:name] = Faker::Lorem.word
-	o[:question_id] = Question.pluck(:id).sample
-	o[:response] = Faker::Lorem.word
-	o[:user_answer] = Faker::Lorem.word
-	o.save
+def generate_options(question_id, num)
+	#q = Question.all
+	#binding.pry
+	num.times do
+	  o = Option.new
+	  o[:name] = Faker::Lorem.word
+	  o[:question_id] = question_id
+	  o[:response] = Faker::Lorem.word
+	  o[:user_answer] = Faker::Lorem.word
+	
+	  o.save
+	  #binding.pry
+    end
 end
 
 MULTIPLIER.times { generate_surveys }
@@ -66,13 +75,10 @@ puts "Surveys created"
 MULTIPLIER.times { generate_questions }
 puts "Questions created"
 
-
-MULTIPLIER.times { generate_question_types }
+QUESTION_TYPE.each  { |q_type| generate_question_types(q_type) }
 puts "Question types created"
 
-MULTIPLIER.times { generate_options }
-puts "Options created"
+#MULTIPLIER.times { generate_options }
+#puts "Options created"
 
 
-MULTIPLIER.times { generate_question_types }
-puts "Question types created"

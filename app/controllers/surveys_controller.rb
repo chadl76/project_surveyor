@@ -6,4 +6,14 @@ class SurveysController < ApplicationController
 	def new
 		@survey = Survey.new
 	end
+
+	private
+
+	def survey_params
+		params.require(:survey).permit(
+			:title,
+			:description,
+			:count,
+			:question_id)
+	end
 end
