@@ -3,6 +3,9 @@
 			  <%= survey_form.label :title %>
 			  <%= survey_form.text_field :title%>
 
+			  <%= survey_form.label :description %>
+			  <%= survey_form.text_field :description %>
+
 			  <h1>type</h1>
 
 			  <%=survey_form.fields_for(:question_type, QuestionType.new) do |question_type_fields| %>

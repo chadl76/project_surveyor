@@ -1,0 +1,26 @@
+			<%=form_for @question do |q| %>
+		
+			  <%= q.label :Question_name %>
+			  <%= q.text_field :title%>
+
+			  <%= q.label :question_type %>
+			  <%= q.text_field :question_type %>
+
+			  
+			  <%= q.radio_button :required, "true" %><p>true</p>
+			  <%= q.radio_button :required, "false" %><p>false</p>
+
+
+			  <h1>type<h1>
+
+			  <%=q.fields_for(:options, Option.new) do |options_fields| %>
+			  <%= options_fields.label :options %>
+			  <%= options_fields.text_field :name %>
+
+			  <%= options_fields.label :response %>
+			  <%= options_fields.text_field :response %>
+			  
+
+			<%= q.submit "Add a New Question", :class => "btn btn-large btn-primary btn-block" %>
+			<% end %>
+			<% end %>

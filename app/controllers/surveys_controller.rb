@@ -7,6 +7,13 @@ class SurveysController < ApplicationController
 		@survey = Survey.new
 	end
 
+	def create
+		@survey = Survey.new(survey_params)
+		if @survey.save
+			flash[:success] = "Survey 1"
+			redirect_to 
+	end
+
 	private
 
 	def survey_params
@@ -14,6 +21,11 @@ class SurveysController < ApplicationController
 			:title,
 			:description,
 			:count,
-			:question_id)
+			:question_id,
+			:question_types_attributes => [
+				:id,
+				:question_type,
+				:question_id,
+				])
 	end
 end
