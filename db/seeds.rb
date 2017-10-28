@@ -24,8 +24,6 @@ def generate_question_types(q_type)
 	#binding.pry
 	qt = QuestionType.new({:question_type => q_type})
 	qt[:question_id] = Question.pluck(:id).sample
-	#qt[:question_type] = q_type
-	#binding.pry
 	qt.save
 end
 
@@ -53,15 +51,12 @@ end
 
 
 def generate_options(question_id, num)
-	#q = Question.all
-	#binding.pry
 	num.times do
 	  o = Option.new
 	  o[:name] = Faker::Lorem.word
 	  o[:question_id] = question_id
 	  o[:response] = Faker::Lorem.word
 	  o[:user_answer] = Faker::Lorem.word
-	
 	  o.save
 	  #binding.pry
     end
@@ -78,7 +73,5 @@ puts "Questions created"
 QUESTION_TYPE.each  { |q_type| generate_question_types(q_type) }
 puts "Question types created"
 
-#MULTIPLIER.times { generate_options }
-#puts "Options created"
 
 
