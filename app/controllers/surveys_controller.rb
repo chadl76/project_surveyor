@@ -11,7 +11,8 @@ class SurveysController < ApplicationController
 		@survey = Survey.new(survey_params)
 		if @survey.save
 			flash[:success] = "Survey 1"
-			redirect_to 
+			redirect_to new_survey_question_path(@survey)
+		end
 	end
 
 	private
@@ -22,10 +23,9 @@ class SurveysController < ApplicationController
 			:description,
 			:count,
 			:question_id,
-			:question_types_attributes => [
+			:question_type_attributes => [
 				:id,
-				:question_type,
-				:question_id,
+				:question_type
 				])
 	end
 end

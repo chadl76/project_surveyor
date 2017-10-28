@@ -1,5 +1,7 @@
 			<%=form_for @question do |q| %>
+				
 		
+
 			  <%= q.label :Question_name %>
 			  <%= q.text_field :title%>
 
@@ -19,8 +21,12 @@
 
 			  <%= options_fields.label :response %>
 			  <%= options_fields.text_field :response %>
+
+			  <%= q.hidden_field :survey_id %>
+
 			  
 
 			<%= q.submit "Add a New Question", :class => "btn btn-large btn-primary btn-block" %>
+		
 			<% end %>
 			<% end %>

@@ -1,10 +1,21 @@
 class QuestionsController < ApplicationController
 	def new
-		@question = Question.new
+#survey = Survey.find(params[:id])
+		@question = Question.new(survey_id: params[:survey_id])
+		#@survey = Survey.find(params[:id])
 	end
 
 	def create
+		
 		@question = Question.new(question_params)
+
+
+		if @question.save
+			flash[:success] = "Saved"
+			redirect_to surveys_path
+		else
+			puts @question.errors.full_messages
+		end
 	end
 
 
@@ -16,9 +27,15 @@ class QuestionsController < ApplicationController
 			:question_type,
 			:required,
 			:options_num,
+			:survey_id,
 			:options_attributes => [
 				:id,
 				:name,
-				:response])
+				:response],
+			:survey_attributes => [
+				:id,
+				:title,
+				:description,
+				])
 	end
 end
