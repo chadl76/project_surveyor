@@ -2,7 +2,7 @@
 		<div class="row">
 			<div class="col-xs-6">
 	
-				<%=form_for @question do |question_fields| %>
+				<%=form_for [:survey, @question] do |question_fields| %>
 				
 				<%=question_fields.hidden_field :options %>
 				<div class="field form-group">

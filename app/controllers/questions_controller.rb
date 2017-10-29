@@ -11,7 +11,11 @@ class QuestionsController < ApplicationController
 	end
 
 	def create
+		@survey = Survey.find(params[:survey_id])
+		@options = Option.last
 		@question = Question.new(question_params)
+		@survey.questions
+		#@question = Survey.find(params[:id].Question.new(question_params)
 		  if @question.save
 			flash[:success] = "Saved"
 			redirect_to survey_question_path(@question.id, @survey.id)
