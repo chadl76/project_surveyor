@@ -9,10 +9,13 @@ class SurveysController < ApplicationController
 
 	def create
 		@survey = Survey.new(survey_params)
-		if @survey.save
+		  if @survey.save
 			flash[:success] = "Survey 1"
-			redirect_to new_survey_question_path(@survey)
+			redirect_to new_survey_option_path(@survey)
+		  else 
+		  	redirect_to :new
 		end
+
 	end
 
 	private

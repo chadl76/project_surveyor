@@ -1,32 +1,37 @@
-			<%=form_for @question do |q| %>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-6">
+	
+				<%=form_for @question do |question_fields| %>
 				
-		
+				<%=question_fields.hidden_field :options %>
+				<div class="field form-group">
+					<p><strong>What is your question?</strong></p>
+					<%=question_fields.text_field :title, :class => "col-xs-6"%>
+				</div>
+				<br>
 
-			  <%= q.label :Question_name %>
-			  <%= q.text_field :title%>
+				<div class="field form-group">
+					<%=question_fields.fields_for(:option, Option.new(survey_id: params[:survey_id])) do |options_fields|%>
+				</div>
+				
+			
+					<%@options_num.times do |x| %>
+				<div class="field form-group">
+				
+					<span>
+					<p><strong><%="Option #{x+1}:"%></strong></p><span>
+					<%=options_fields.text_field :name, :class => "col-x-6"%>
+					
+				</div>
 
-			  <%= q.label :question_type %>
-			  <%= q.text_field :question_type %>
-
-			  
-			  <%= q.radio_button :required, "true" %><p>true</p>
-			  <%= q.radio_button :required, "false" %><p>false</p>
-
-
-			  <h1>type<h1>
-
-			  <%=q.fields_for(:options, Option.new) do |options_fields| %>
-			  <%= options_fields.label :options %>
-			  <%= options_fields.text_field :name %>
-
-			  <%= options_fields.label :response %>
-			  <%= options_fields.text_field :response %>
-
-			  <%= q.hidden_field :survey_id %>
-
-			  
-
-			<%= q.submit "Add a New Question", :class => "btn btn-large btn-primary btn-block" %>
-		
+			
+				<%end%>
+				<div class="field form-group col-xs-6">
+					<%=question_fields.submit "Add Question", :class=> "btn btn-large btn-primary btn-block" %>
+				<% end%>
 			<% end %>
-			<% end %>
+				
+			</div>
+		</div>
+	</div>

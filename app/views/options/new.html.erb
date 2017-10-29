@@ -1,0 +1,20 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-6">
+			<%=form_for [:survey, @option], {:html => {:class => "form-horizontal"}} do |option_fields| %>
+			<%= option_fields.hidden_field :survey_id %>
+			<h2>Add a multiple choice Question</h2>
+
+			<p>How many options should the question have </p>
+			<div class="field form-group">
+				<%=option_fields.select :options_num, options_for_select(1..5) %>
+			</div>
+
+			<div class="field form-group">
+				<%=option_fields.submit "Continue to the Next Step", :class => "btn btn-large btn-primary btn-block" %>
+			</div>
+
+			<%end%>
+		</div>
+	</div>
+</div>

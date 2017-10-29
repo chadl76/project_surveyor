@@ -1,22 +1,48 @@
-			<%=form_for @survey do |survey_form| %>
-		
-			  <%= survey_form.label :title %>
-			  <%= survey_form.text_field :title%>
+<div class="container">
+		<div class="row">
+			<div class="col-xs-6">
+				<%=form_for @survey, {:html => {:class => "form-horizontal" }} do |survey_fields| %>
 
-			  <%= survey_form.label :description %>
-			  <%= survey_form.text_field :description %>
+				<div class="field form-group">
+					<%=survey_fields.label :title, :class => "col-xs-3" %>
+					<br>
+					<%=survey_fields.text_field :title, :class => "col-xs-3" %>
+				</div>
 
-			  <h1>type</h1>
+				<div class="field form-group">
+					<%=survey_fields.label :description, :class => "col-xs-3" %>
+					<br>
+					<%= survey_fields.text_field :description, :class => "col-xs-3" %>
+				</div>
 
-			  <%=survey_form.fields_for(:question_type, QuestionType.new) do |question_type_fields| %>
-			  <%= question_type_fields.label :question_type %>
-			  <%= question_type_fields.collection_select(:question_type,
-			  	  QuestionType.all,
-			  	  :id,
-			  	  :question_type	) %>
-			
+				<br>
+				
+				<h2>Add a Question</h2>
+				<p> Choose which type of question to add</p>
+				
 
-			<%= survey_form.submit "Add a New Question", :class => "btn btn-large btn-primary btn-block" %>
-			<% end %>
-			<% end %>
-	
+				<div class="field form-group">
+				  <%=survey_fields.fields_for(:question_type, QuestionType.new) do |question_type_fields| %>
+
+				  <%=question_type_fields.label :question_type, :class =>"col-xs-3"%>
+				  <br>
+
+				  <%=question_type_fields.collection_select(
+				  		:question_type,
+				  		QuestionType.all,
+				  		:id,
+				  		:question_type) %>
+				</div>
+
+				<br>
+				<div class="field form-group">
+				<%=survey_fields.submit "Add a New Question", :class => "btn btn-large btn-primary btn-block" %>
+				</div> 
+
+
+				<%end%>
+				<%end%>
+
+			</div>
+		</div>
+	</div>
